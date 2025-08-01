@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+// Get the backend URL from environment variables or use localhost for development
+const BACKEND_URL = 'https://sarkari-sahayak.onrender.com';
+
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: BACKEND_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

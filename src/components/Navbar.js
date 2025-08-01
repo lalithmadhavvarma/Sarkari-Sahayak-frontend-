@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, User, FileText, Bell, Info } from 'lucide-react';
+import { Menu, X, Home, User, FileText, Bell, Info, Shield } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +47,15 @@ const Navbar = () => {
                 </Link>
               );
             })}
+            
+            {/* Admin Button */}
+            <Link
+              to="/admin-login"
+              className="flex items-center px-4 py-2 rounded-md text-sm font-medium text-white bg-red-600 hover:bg-red-700 transition-colors"
+            >
+              <Shield className="h-4 w-4 mr-1" />
+              Admin
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -87,6 +96,16 @@ const Navbar = () => {
                 </Link>
               );
             })}
+            
+            {/* Admin Button for Mobile */}
+            <Link
+              to="/admin-login"
+              className="flex items-center px-3 py-2 rounded-md text-base font-medium text-white bg-red-600 hover:bg-red-700 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              <Shield className="h-5 w-5 mr-2" />
+              Admin
+            </Link>
           </div>
         </div>
       )}

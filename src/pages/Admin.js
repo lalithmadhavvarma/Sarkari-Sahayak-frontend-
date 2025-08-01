@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Users, FileText, TrendingUp, Eye, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Plus, Edit, Trash2, Users, FileText, TrendingUp, Eye, X, LogOut } from 'lucide-react';
 import api from '../utils/api';
 import toast from 'react-hot-toast';
 
 const Admin = () => {
+  const navigate = useNavigate();
   const [schemes, setSchemes] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -95,6 +97,13 @@ const Admin = () => {
     }));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUser');
+    toast.success('Logged out successfully');
+    navigate('/admin-login');
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -107,9 +116,18 @@ const Admin = () => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-          <p className="text-gray-600">Manage schemes and subscribers</p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+            <p className="text-gray-600">Manage schemes and subscribers</p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            Logout
+          </button>
         </div>
 
         {/* Stats */}
